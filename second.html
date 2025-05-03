@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Smart Uploader Dashboard – Simple, Secure Document Previews.">
+  <meta property="og:title" content="Smart Uploader Dashboard">
+  <title>Smart Uploader Dashboard</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-color: #fff;
+      --text-color: #111;
+      --header-bg: #000;
+      --header-text: #fff;
+      --card-bg: #fff;
+      --card-border: #ddd;
+      --footer-bg: #000;
+      --footer-text: #fff;
+      --button-bg: #fff;
+      --button-text: #000;
+      --btn-hover-bg: #f8f8f8;
+    }
+
+    [data-theme="dark"] {
+      --bg-color: #111;
+      --text-color: #f5f5f5;
+      --header-bg: #222;
+      --card-bg: #1e1e1e;
+      --card-border: #444;
+      --footer-bg: #222;
+      --btn-hover-bg: #2f2f2f;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    header {
+      background-color: var(--header-bg);
+      color: var(--header-text);
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    .btn-primary {
+      background: var(--button-bg);
+      color: var(--button-text);
+      border: 1px solid var(--button-text);
+      font-weight: bold;
+      padding: 10px 25px;
+      border-radius: 4px;
+      transition: background 0.3s, color 0.3s, border 0.3s;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--btn-hover-bg);
+      color: var(--button-text);
+    }
+
+    html:not([data-theme="dark"]) .btn-primary:hover {
+      background-color: #000;
+      color: #fff;
+    }
+
+    [data-theme="dark"] .btn-primary:hover {
+      background-color: #fff;
+      color: #000;
+    }
+
+    h2 i {
+      margin-right: 10px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    }
+
+    .example-output {
+      border: 1px dashed #aaa;
+      padding: 15px;
+      border-radius: 8px;
+      background: #f9f9f9;
+    }
+
+    [data-theme="dark"] .card {
+      color: white;
+    }
+
+    [data-theme="dark"] .example-output {
+      color: #000 !important;
+      background: #f9f9f9 !important;
+      border-color: #aaa !important;
+    }
+
+    .theme-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: var(--button-bg);
+      color: var(--button-text);
+      border: 1px solid var(--button-text);
+      padding: 6px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9em;
+      transition: background 0.3s;
+    }
+
+    .theme-toggle:hover {
+      background: #f0f0f0;
+    }
+
+    footer {
+      background-color: var(--footer-bg);
+      color: var(--footer-text);
+      text-align: center;
+      padding: 30px 0;
+    }
+
+    .footer-icons a {
+      color: var(--footer-text);
+      margin: 0 10px;
+      font-size: 1.2em;
+      transition: color 0.3s;
+    }
+
+    .footer-icons a:hover {
+      color: #ccc;
+    }
+
+    #scrollTopBtn {
+      display: none;
+      position: fixed;
+      bottom: 30px;
+      right: 20px;
+      z-index: 99;
+      font-size: 18px;
+      border: none;
+      outline: none;
+      background-color: var(--button-bg);
+      color: var(--button-text);
+      cursor: pointer;
+      padding: 12px 16px;
+      border-radius: 50%;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    #scrollTopBtn:hover {
+      background-color: var(--btn-hover-bg);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1 class="display-5">Smart Uploader Dashboard</h1>
+    <p class="lead">Simple. Fast. Secure Document Preview.</p>
+    <a class="btn btn-primary" href="index.html">Start uploading</a>
+  </header>
+
+  <section class="container py-5" data-aos="fade-up">
+    <h2 class="text-center"><i class="fas fa-bolt"></i>Features</h2>
+    <div class="row text-center mt-4">
+      <div class="col-md-3 mb-3"><div class="card p-3">Auto-preview</div></div>
+      <div class="col-md-3 mb-3"><div class="card p-3">Secure Uploads</div></div>
+      <div class="col-md-3 mb-3" onclick="toggleTheme()"><div class="card p-3">Light/Dark Mode</div></div>
+      <div class="col-md-3 mb-3"><div class="card p-3">Mobile Friendly</div></div>
+    </div>
+  </section>
+
+  <section class="container py-5" data-aos="fade-up">
+    <h2><i class="fas fa-lock"></i>Trust & Security</h2>
+    <p>We use end-to-end encryption for all documents. No third-party access or data selling — your documents are yours alone.</p>
+  </section>
+
+  <section id="examples" class="container py-5" data-aos="fade-up">
+    <h2><i class="fas fa-file-alt"></i>Example Outputs</h2>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <div class="card example-output">
+          <strong>PDF Summary:</strong>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <div class="card example-output">
+          <strong>Image Text Detected:</strong>
+          <p>"Welcome to Smart Uploader!"</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container py-5" data-aos="fade-up">
+    <h2><i class="fas fa-users"></i>Use Cases</h2>
+    <ul>
+      <li>Students: Summarize notes instantly</li>
+      <li>Researchers: Extract key points from academic papers</li>
+      <li>Admins: Manage and preview documents securely</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p class="mb-2">&copy; 2025 SmartUploader. All rights reserved.</p>
+    <div class="footer-icons mb-2">
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-github"></i></a>
+      <a href="#"><i class="fab fa-linkedin"></i></a>
+    </div>
+    <p><a href="#" class="text-decoration-none text-light">Terms</a> | <a href="#" class="text-decoration-none text-light">Contact</a></p>
+  </footer>
+
+  <button onclick="scrollToTop()" id="scrollTopBtn" title="Back to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- JS Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      if (currentTheme === 'dark') {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    }
+
+    // Load theme from localStorage
+    (function () {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+
+    // Show scroll-to-top button
+    window.onscroll = function () {
+      const btn = document.getElementById("scrollTopBtn");
+      if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        btn.style.display = "block";
+      } else {
+        btn.style.display = "none";
+      }
+    };
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
